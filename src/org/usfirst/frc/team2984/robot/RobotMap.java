@@ -37,6 +37,12 @@ public class RobotMap {
 	
 	public static final double LINEAR_DRIVE_P = 0.1;
 	public static final double ANGULAR_DRIVE_P = 0.1;
-	public static final double PEG_APPROACH_DISTANCE_THRESHOLD = 15;
+	public static final double PEG_APPROACH_DISTANCE_THRESHOLD = 8;
+	public static final double PEG_DISTANCE_DISTANCE_P = 0.4;
+	public static final double PEG_MAX_DOCKING_DISTANCE = 15;
+	public static final double ANGLE_PREDICTION_P = 0.3;
+	
+	public static final double DISTANCE_BETWEEN_WHEELS = 20;
+	public static final double VELOCITY_P = 0.004;
 
 }

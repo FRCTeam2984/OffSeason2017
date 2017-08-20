@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2984.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -12,20 +11,16 @@ public class GetToStartingPosition extends CommandGroup {
     	if(pegPos == 1){
         	addSequential(new MoveLinearly(50, 1));
         	addSequential(new TurnToAngle(60, 1));
-        	Pivot turn = new Pivot(60, true, 1);
-        	addSequential(new DriveToPeg(60, turn));
-        	addSequential(turn);
+        	addSequential(new DriveToPeg(60));
     	} else if(pegPos == 3){
         	addSequential(new MoveLinearly(50, 1));
         	addSequential(new TurnToAngle(-60, 1));
-        	Pivot turn = new Pivot(-60, true, 1);
-        	addSequential(new DriveToPeg(-60, turn));
-        	addSequential(turn);
+        	addSequential(new DriveToPeg(-60));
     	} else if(pegPos == 2){
-        	addSequential(new MoveLinearly(20, 1));
-        	Pivot turn = new Pivot(0, true, 1);
-        	addSequential(new DriveToPeg(0, turn));
-        	addSequential(turn);
+//        	addSequential(new MoveLinearly(10, 1));
+//        	Pivot turn = new Pivot(0, true, 1);
+        	addSequential(new DriveToPeg(0));
+//        	addSequential(turn);
     	}
     	addSequential(new Done());
         // Add Commands here:

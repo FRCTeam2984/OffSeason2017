@@ -23,6 +23,9 @@ public class DriveTrain extends Subsystem {
 	
 	private Gyroscope gyro;
 	
+	private double powerAccumLeft;
+	private double powerAccumRight;
+	
 	public static DriveTrain getInstance() {
 		if (instance == null) {
 			CANTalon frontLeft = new CANTalon(RobotMap.FRONT_LEFT_MOTOR_ID);
@@ -74,6 +77,13 @@ public class DriveTrain extends Subsystem {
 			this.frontRight.set(0);
 			this.backRight.set(0);
 		}
+	}
+	
+	public void drive(double left, double right){
+		this.frontLeft.set(left);
+		this.frontRight.set(right);
+		this.backLeft.set(left);
+		this.backRight.set(right);
 	}
 	
 	/**
@@ -170,6 +180,29 @@ public class DriveTrain extends Subsystem {
 		double rotationPower = Math.min(Math.max(deltaAngle*RobotMap.ANGULAR_DRIVE_P, -1), 1);
 		Motion m = new Motion(0,0,rotationPower);
 		this.drive(m, left, !left);
+	}
+	
+	/**
+	 * drives the wheels at the given speeds
+	 * @param left the speed in inches per second of the left wheel
+	 * @param right speed in inches per second of the right wheel
+	 */
+	public void driveWheelSpeeds(double left, double right){
+		double leftActual = this.convertEncPositionToInches(this.backLeft.getEncVelocity());
+		double rightActual = leftActual - this.gyro.getRate()*RobotMap.DISTANCE_BETWEEN_WHEELS/180;
+		double leftDelta = left - leftActual;
+		double rightDelta = right - rightActual;
+		this.powerAccumLeft += leftDelta * RobotMap.VELOCITY_P;
+		this.powerAccumRight += rightDelta * RobotMap.VELOCITY_P;
+		this.powerAccumLeft = Math.min(Math.max(this.powerAccumLeft, -1), 1);
+		this.powerAccumRight = Math.min(Math.max(this.powerAccumRight, -1), 1);
+		this.drive(this.powerAccumLeft, this.powerAccumRight);
+		System.out.println("Driveing at (" + this.powerAccumLeft + ", " + this.powerAccumRight + ") based on wanted (" + left + ", " + right + ") with speeds (" + leftActual + ", " + rightActual + ")");
+	}
+	
+	public void resetAccums(){
+		this.powerAccumLeft = 0;
+		this.powerAccumRight = 0;
 	}
 }
 

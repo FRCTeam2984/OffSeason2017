@@ -43,7 +43,6 @@ public class DriveToPeg extends Command {
     	double distance = target.getDistance(RobotMap.CAMERA_SPECIFICATION, RobotMap.TARGET_DIMENSION);
     	double compositAngle = target.getRotation(RobotMap.CAMERA_SPECIFICATION) + Gyroscope.getInstance().getAngle();
     	double targetAngle = PegAproachCalculator.getHeadingAngle(distance, compositAngle, pegAngle, RobotMap.PEG_APPROACH_DISTANCE_THRESHOLD);
-		System.out.println("Target Angle: " + targetAngle);
     	DriveTrain.getInstance().driveAtAngle(targetAngle, 0.5);
     	if(this.optional != null)
     		this.optional.setSide(compositAngle <= pegAngle);

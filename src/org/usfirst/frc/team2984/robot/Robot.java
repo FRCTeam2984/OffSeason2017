@@ -72,9 +72,30 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new GetToStartingPosition(1);
+		autonomousCommand = new GetToStartingPosition(3);
 //		this.autonomousCommand = new DriveAndPivotTest();
 //		this.autonomousCommand = new Pivot(180, true, 1);
+		
+//		double[][] wayPoints = new double[][]{
+//			{10D/12, 0},
+//			{10D/12, 50D/12},
+//			{0, 67D/12}
+//		};
+//		FalconPathPlanner path = new FalconPathPlanner(wayPoints);
+////		path.setPathAlpha(0.3);
+////		path.setPathBeta(0.3);
+//		path.calculate(3.5, 20/1000D, RobotMap.DISTANCE_BETWEEN_WHEELS/12);
+//		FalconLinePlot fig1 = new FalconLinePlot(path.nodeOnlyPath, Color.blue, Color.green);
+//		fig1.yGridOn();
+//		fig1.xGridOn();
+//		fig1.setYLabel("Y (in)");
+//		fig1.setXLabel("X (in)");
+//		fig1.setTitle("Top Down View of FRC Field (24ft x 27ft) \n shows global position of robot path, along with left and right wheel trajectories");
+//
+//		fig1.setYTic(0, 6, 1);
+//		fig1.setXTic(0, 1, 1/12D);
+//		fig1.addData(path.smoothPath, Color.red, Color.blue);
+//		this.autonomousCommand = new FollowPath(path);
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
