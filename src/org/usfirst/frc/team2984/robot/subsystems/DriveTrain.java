@@ -2,6 +2,7 @@ package org.usfirst.frc.team2984.robot.subsystems;
 
 import org.opencv.core.Point;
 import org.usfirst.frc.team2984.robot.RobotMap;
+import org.usfirst.frc.team2984.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team2984.robot.util.MathUtil;
 import org.usfirst.frc.team2984.robot.util.Motion;
 
@@ -95,6 +96,7 @@ public class DriveTrain extends Subsystem {
 	}
 
     public void initDefaultCommand() {
+    	setDefaultCommand(new DriveWithJoystick());
     }
 
     /**
@@ -197,7 +199,6 @@ public class DriveTrain extends Subsystem {
 		this.powerAccumLeft = Math.min(Math.max(this.powerAccumLeft, -1), 1);
 		this.powerAccumRight = Math.min(Math.max(this.powerAccumRight, -1), 1);
 		this.drive(this.powerAccumLeft, this.powerAccumRight);
-		System.out.println("Driveing at (" + this.powerAccumLeft + ", " + this.powerAccumRight + ") based on wanted (" + left + ", " + right + ") with speeds (" + leftActual + ", " + rightActual + ")");
 	}
 	
 	public void resetAccums(){
