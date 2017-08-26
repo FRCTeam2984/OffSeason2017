@@ -28,10 +28,6 @@ public class RobotMap {
 	
 	public static final double VALUE_LOW = 75;
 
-	public static int leftDistanceSensorPort = 3; // TODO: set value
-	public static int rightDistanceSensorPort = 1; // TODO: set value
-	
-	
 	public static final double ROBOT_START_ANGLE = 0;
 	
 	public static final double INCHES_PER_TICK_DRIVEN = 0.016666667;
