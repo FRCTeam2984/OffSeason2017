@@ -38,8 +38,8 @@ public class TrackingThread extends Thread {
 
 	
 	public TrackingThread(){
-		minc = new Scalar(18, 70, RobotMap.VALUE_LOW);
-		maxc = new Scalar(103, 255, 255);
+		minc = new Scalar(RobotMap.HUE_LOW, RobotMap.SATURATION_LOW, RobotMap.VALUE_LOW);
+		maxc = new Scalar(RobotMap.HUE_HIGH, RobotMap.SATURATION_HIGH, RobotMap.VALUE_HIGH);
 		this.shouldProcess = true;
 		this.hasTrack = false;
 		this.tmp = new Mat();

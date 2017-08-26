@@ -9,6 +9,7 @@ import org.usfirst.frc.team2984.robot.util.Motion;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -53,6 +54,8 @@ public class DriveTrain extends Subsystem {
 		this.backLeft = backLeft;
 		this.backRight = backRight;
 		
+		frontRight.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+		
 		this.gyro = gyro;
 	}
 	
@@ -65,8 +68,8 @@ public class DriveTrain extends Subsystem {
 		double left = m.getY() + m.getRotation();
 		double right = m.getY() - m.getRotation();
 		if(leftEnabled){
-			this.frontLeft.set(left);
-			this.backLeft.set(left);
+			this.frontLeft.set(-left);
+			this.backLeft.set(-left);
 		} else {
 			this.frontLeft.set(0);
 			this.backLeft.set(0);
@@ -104,7 +107,7 @@ public class DriveTrain extends Subsystem {
      * @param point a point representing the final position of the robot in x, y space, Y is forward from the robot
      */
 	public void moveToPosition(Point point) {
-		double distanceTravled = this.convertEncPositionToInches(this.backLeft.getEncPosition());
+		double distanceTravled = this.convertEncPositionToInches(this.frontRight.getEncPosition());
 		double distanceToGo = Math.sqrt(point.x*point.x + point.y*point.y);
 		double distanceLeft = Math.abs(distanceToGo - distanceTravled);
 		double power = Math.min(distanceLeft * RobotMap.LINEAR_DRIVE_P, 1);
@@ -128,7 +131,7 @@ public class DriveTrain extends Subsystem {
 	 * @return whether or not the drive train has reached the position
 	 */
 	public boolean isAtPosition(Point finalLocation, double epsilon) {
-		double distanceTravled = this.convertEncPositionToInches(this.backLeft.getEncPosition());
+		double distanceTravled = this.convertEncPositionToInches(this.frontRight.getEncPosition());
 		double distanceToGo = Math.sqrt(finalLocation.x*finalLocation.x + finalLocation.y*finalLocation.y);
 		double distanceLeft = Math.abs(distanceToGo - distanceTravled);
 		return distanceLeft <= epsilon;
@@ -167,6 +170,7 @@ public class DriveTrain extends Subsystem {
 		double deltaAngle = MathUtil.shortestDeltaAngle(currentAngle, targetAngle);
 		double rotationPower = Math.min(Math.max(deltaAngle*RobotMap.ANGULAR_DRIVE_P, -1), 1);
 		Motion m = new Motion(0,speed,rotationPower);
+		SmartDashboard.putString("Motion, delta", m.toString() + " " + deltaAngle);
 		this.drive(m);
 	}
 
@@ -190,7 +194,8 @@ public class DriveTrain extends Subsystem {
 	 * @param right speed in inches per second of the right wheel
 	 */
 	public void driveWheelSpeeds(double left, double right){
-		double leftActual = this.convertEncPositionToInches(this.backLeft.getEncVelocity());
+		//TODO Flip side, encoder already flipped
+		double leftActual = this.convertEncPositionToInches(this.frontRight.getEncVelocity());
 		double rightActual = leftActual - this.gyro.getRate()*RobotMap.DISTANCE_BETWEEN_WHEELS/180;
 		double leftDelta = left - leftActual;
 		double rightDelta = right - rightActual;

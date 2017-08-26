@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new GetToStartingPosition(2);
+		autonomousCommand = new GetToStartingPosition(1);
 //		this.autonomousCommand = new DriveAndPivotTest();
 //		this.autonomousCommand = new Pivot(180, true, 1);
 		
