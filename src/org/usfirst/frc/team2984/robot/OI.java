@@ -1,7 +1,10 @@
 package org.usfirst.frc.team2984.robot;
 
+import org.usfirst.frc.team2984.robot.commands.DecrementDebug;
 import org.usfirst.frc.team2984.robot.commands.DriveToPeg;
+import org.usfirst.frc.team2984.robot.commands.IncrementDebug;
 import org.usfirst.frc.team2984.robot.commands.MoveLinearly;
+import org.usfirst.frc.team2984.robot.commands.RotateDebug;
 import org.usfirst.frc.team2984.robot.commands.TurnToAngle;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -48,7 +51,10 @@ public class OI {
 		new JoystickButton(this.stick, 2).cancelWhenPressed(new MoveLinearly(0, 0.5));
 		new JoystickButton(this.stick, 3).cancelWhenPressed(new TurnToAngle(90, 0.5));
 		new JoystickButton(this.stick, 4).cancelWhenPressed(new TurnToAngle(-90, 0.5));
-		new JoystickButton(this.stick, 3).cancelWhenPressed(new DriveToPeg(0));
+		new JoystickButton(this.stick, 5).cancelWhenPressed(new DriveToPeg(0));
+		new JoystickButton(this.stick, 6).cancelWhenPressed(new IncrementDebug());
+		new JoystickButton(this.stick, 7).cancelWhenPressed(new DecrementDebug());
+		new JoystickButton(this.stick, 8).cancelWhenPressed(new RotateDebug());
 
 	}
 }
