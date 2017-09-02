@@ -27,6 +27,9 @@ public class DebugValueSystem extends Subsystem {
 	
 	public void rotate(){
 		this.index++;
+		if(this.index >= this.size){
+			this.index = 0;
+		}
 		SmartDashboard.putString("Updating Value: ", getString());
 	}
 	

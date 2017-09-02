@@ -17,7 +17,7 @@ public class MathUtil {
 		} else if(toMoveTo < 0){
 			return shortestDeltaAngle(angle, 360 + toMoveTo % 360);
 		}
-		double difference = toMoveTo - angle;
+		double difference = toMoveTo%360 - angle%360;
 		double otherWay = -Math.copySign(360 - Math.abs(difference), difference);
 		if(Math.abs(difference) < Math.abs(otherWay)){
 			return difference%360;

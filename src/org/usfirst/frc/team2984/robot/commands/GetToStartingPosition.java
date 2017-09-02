@@ -9,12 +9,12 @@ public class GetToStartingPosition extends CommandGroup {
 
     public GetToStartingPosition(int pegPos) {
     	if(pegPos == 1){
-        	addSequential(new MoveLinearly(50, 1));
-        	addSequential(new TurnToAngle(60, 1));
+        	addSequential(new MoveLinearly(50, 2));
+        	addSequential(new TurnToAngle(60, 5));
 //        	addSequential(new DriveToPeg(60));
     	} else if(pegPos == 3){
-        	addSequential(new MoveLinearly(50, 1));
-        	addSequential(new TurnToAngle(-60, 1));
+        	addSequential(new MoveLinearly(50, 2));
+        	addSequential(new TurnToAngle(-60, 5));
         	addSequential(new DriveToPeg(-60));
     	} else if(pegPos == 2){
         	addSequential(new MoveLinearly(0, 1));

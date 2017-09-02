@@ -107,9 +107,10 @@ public class DriveTrain extends Subsystem {
      * @param point a point representing the final position of the robot in x, y space, Y is forward from the robot
      */
 	public void moveToPosition(Point point) {
-		double distanceTravled = this.convertEncPositionToInches(this.frontRight.getEncPosition());
-		double distanceToGo = Math.sqrt(point.x*point.x + point.y*point.y);
-		double distanceLeft = Math.abs(distanceToGo - distanceTravled);
+		SmartDashboard.putNumber("Enc Position", this.backLeft.getEncPosition());
+		double distanceTravled = this.convertEncPositionToInches(this.backLeft.getEncPosition());
+		double distanceToGo =point.y;
+		double distanceLeft = distanceToGo - distanceTravled;
 		double power = Math.min(distanceLeft * RobotMap.LINEAR_DRIVE_P, 1);
 		Motion m = new Motion(0, power, 0);
 		this.drive(m);
@@ -131,7 +132,8 @@ public class DriveTrain extends Subsystem {
 	 * @return whether or not the drive train has reached the position
 	 */
 	public boolean isAtPosition(Point finalLocation, double epsilon) {
-		double distanceTravled = this.convertEncPositionToInches(this.frontRight.getEncPosition());
+		SmartDashboard.putNumber("Enc Position", this.backLeft.getEncPosition());
+		double distanceTravled = this.convertEncPositionToInches(this.backLeft.getEncPosition());
 		double distanceToGo = Math.sqrt(finalLocation.x*finalLocation.x + finalLocation.y*finalLocation.y);
 		double distanceLeft = Math.abs(distanceToGo - distanceTravled);
 		return distanceLeft <= epsilon;
@@ -144,9 +146,10 @@ public class DriveTrain extends Subsystem {
 	public void turnToAngle(double angle) {
 		double currentAngle = this.gyro.getAngle();
 		double deltaAngle = MathUtil.shortestDeltaAngle(currentAngle, angle);
-		double rotationPower = Math.min(Math.max(deltaAngle*RobotMap.ANGULAR_DRIVE_P, -1), 1);
+		double rotationPower = Math.min(Math.max(deltaAngle*RobotMap.ANGULAR_DRIVE_P, -RobotMap.MAX_ANGULAR_SPEED), RobotMap.MAX_ANGULAR_SPEED);
 		Motion m = new Motion(0,0,rotationPower);
 		this.drive(m);
+		SmartDashboard.putString("Gyro Position", this.gyro.getAngle() + " " + deltaAngle);
 	}
 
 	/**
@@ -194,8 +197,8 @@ public class DriveTrain extends Subsystem {
 	 * @param right speed in inches per second of the right wheel
 	 */
 	public void driveWheelSpeeds(double left, double right){
-		//TODO Flip side, encoder already flipped
-		double leftActual = this.convertEncPositionToInches(this.frontRight.getEncVelocity());
+		SmartDashboard.putNumber("Enc Position", this.backLeft.getEncPosition());
+		double leftActual = this.convertEncPositionToInches(this.backLeft.getEncVelocity());
 		double rightActual = leftActual - this.gyro.getRate()*RobotMap.DISTANCE_BETWEEN_WHEELS/180;
 		double leftDelta = left - leftActual;
 		double rightDelta = right - rightActual;

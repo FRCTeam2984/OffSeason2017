@@ -2,6 +2,7 @@ package org.usfirst.frc.team2984.robot;
 
 import org.usfirst.frc.team2984.robot.commands.DecrementDebug;
 import org.usfirst.frc.team2984.robot.commands.DriveToPeg;
+import org.usfirst.frc.team2984.robot.commands.GetToStartingPosition;
 import org.usfirst.frc.team2984.robot.commands.IncrementDebug;
 import org.usfirst.frc.team2984.robot.commands.MoveLinearly;
 import org.usfirst.frc.team2984.robot.commands.RotateDebug;
@@ -47,14 +48,14 @@ public class OI {
 	
 	public OI(){
 		this.stick = new Joystick(0);
-		new JoystickButton(this.stick, 1).cancelWhenPressed(new MoveLinearly(24, 0.5));
-		new JoystickButton(this.stick, 2).cancelWhenPressed(new MoveLinearly(0, 0.5));
-		new JoystickButton(this.stick, 3).cancelWhenPressed(new TurnToAngle(90, 0.5));
-		new JoystickButton(this.stick, 4).cancelWhenPressed(new TurnToAngle(-90, 0.5));
-		new JoystickButton(this.stick, 5).cancelWhenPressed(new DriveToPeg(0));
-		new JoystickButton(this.stick, 6).cancelWhenPressed(new IncrementDebug());
-		new JoystickButton(this.stick, 7).cancelWhenPressed(new DecrementDebug());
-		new JoystickButton(this.stick, 8).cancelWhenPressed(new RotateDebug());
+		new JoystickButton(this.stick, 1).whenPressed(new GetToStartingPosition(1));
+		new JoystickButton(this.stick, 2).whenPressed(new MoveLinearly(0, 2));
+		new JoystickButton(this.stick, 3).whenPressed(new TurnToAngle(90, 5));
+		new JoystickButton(this.stick, 4).whenPressed(new TurnToAngle(-90, 5));
+		new JoystickButton(this.stick, 5).whenPressed(new DriveToPeg(0));
+		new JoystickButton(this.stick, 6).whenPressed(new IncrementDebug());
+		new JoystickButton(this.stick, 7).whenPressed(new DecrementDebug());
+		new JoystickButton(this.stick, 8).whenPressed(new RotateDebug());
 
 	}
 }
