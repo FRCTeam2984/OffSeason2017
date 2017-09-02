@@ -32,20 +32,22 @@ public class RobotMap {
 	public static final double HUE_HIGH = 105;
 	public static final double SATURATION_LOW = 50;
 	public static final double SATURATION_HIGH = 107;
+	public static final Dimension CAMERA_ACTIVE_RANGE = new Dimension(320, 30);
+	public static final int CAMERA_ACTIVE_RANGE_VERTICAL_OFFSET = 0;
 
 	public static final double ROBOT_START_ANGLE = 0;
 	
 	public static final double INCHES_PER_TICK_DRIVEN = 0.016666667;
 	
-	public static final double LINEAR_DRIVE_P = 0.1;
-	public static final double ANGULAR_DRIVE_P = 0.001;
+	public static double LINEAR_DRIVE_P = 0.1;
+	public static double ANGULAR_DRIVE_P = 0.001;
 	public static final double PEG_APPROACH_DISTANCE_THRESHOLD = 8;
 	public static final double PEG_DISTANCE_DISTANCE_P = 0.4;
 	public static final double PEG_MAX_DOCKING_DISTANCE = 15;
 	public static final double ANGLE_PREDICTION_P = 0.3;
 	
 	public static final double DISTANCE_BETWEEN_WHEELS = 20;
-	public static final double VELOCITY_P = 0.004;
+	public static double VELOCITY_P = 0.004;
 	
 	public static final int FORWARD_CONTROLLER_AXIS = 1;
 	public static final int ROTATION_CONTROLLER_AXIS = 3;

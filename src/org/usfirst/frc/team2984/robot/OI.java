@@ -1,6 +1,11 @@
 package org.usfirst.frc.team2984.robot;
 
+import org.usfirst.frc.team2984.robot.commands.DriveToPeg;
+import org.usfirst.frc.team2984.robot.commands.MoveLinearly;
+import org.usfirst.frc.team2984.robot.commands.TurnToAngle;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -39,5 +44,11 @@ public class OI {
 	
 	public OI(){
 		this.stick = new Joystick(0);
+		new JoystickButton(this.stick, 1).cancelWhenPressed(new MoveLinearly(24, 0.5));
+		new JoystickButton(this.stick, 2).cancelWhenPressed(new MoveLinearly(0, 0.5));
+		new JoystickButton(this.stick, 3).cancelWhenPressed(new TurnToAngle(90, 0.5));
+		new JoystickButton(this.stick, 4).cancelWhenPressed(new TurnToAngle(-90, 0.5));
+		new JoystickButton(this.stick, 3).cancelWhenPressed(new DriveToPeg(0));
+
 	}
 }

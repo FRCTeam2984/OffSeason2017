@@ -5,6 +5,7 @@ import static org.opencv.core.Core.inRange;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.MatOfPoint2f;
@@ -29,6 +30,7 @@ public class TrackingThread extends Thread {
 	private CameraSpecification spec;
 	private Mat processingMat;
 	private Mat tmp;
+	private Mat roi;
     private Scalar minc;
     private Scalar maxc;
     
@@ -40,6 +42,12 @@ public class TrackingThread extends Thread {
 	public TrackingThread(){
 		minc = new Scalar(RobotMap.HUE_LOW, RobotMap.SATURATION_LOW, RobotMap.VALUE_LOW);
 		maxc = new Scalar(RobotMap.HUE_HIGH, RobotMap.SATURATION_HIGH, RobotMap.VALUE_HIGH);
+		roi = new Mat(new Size(RobotMap.CAMERA_RESOLUTION.width, RobotMap.CAMERA_RESOLUTION.height), CvType.CV_8UC1);
+		double centerX = RobotMap.CAMERA_RESOLUTION.width/2;
+		double centerY = RobotMap.CAMERA_RESOLUTION.height/2 + RobotMap.CAMERA_ACTIVE_RANGE_VERTICAL_OFFSET;
+		Point topLeft = new Point(centerX - RobotMap.CAMERA_ACTIVE_RANGE.width/2, centerY - RobotMap.CAMERA_ACTIVE_RANGE.height/2);
+		Point bottomRight = new Point(centerX + RobotMap.CAMERA_ACTIVE_RANGE.width/2, centerY + RobotMap.CAMERA_ACTIVE_RANGE.height/2);
+		Imgproc.rectangle(roi, topLeft, bottomRight, new Scalar(255));
 		this.shouldProcess = true;
 		this.hasTrack = false;
 		this.tmp = new Mat();

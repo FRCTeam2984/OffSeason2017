@@ -17,6 +17,7 @@ public class MoveLinearly extends Command {
 	/**
 	 * A command to move a fixed distance linearly, it will move straight forward.
 	 * @param distance the distance in feet to move forward
+	 * @param epsilon the epsilon to get within
 	 */
     public MoveLinearly(double distance, double epsilon) {
     	requires(DriveTrain.getInstance());
